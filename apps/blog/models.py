@@ -11,7 +11,7 @@ class BlogCategory(models.Model):
         verbose_name = 'Категория блога'
         verbose_name_plural = 'Категории блога'
 
-
+# создание тего
 class Tag(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
 
@@ -30,6 +30,7 @@ class Article(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
+    #объединение класса Категория с тегами, blank значит - что поле не обязательно
     tags = models.ManyToManyField(to=Tag, verbose_name='Тэги', blank=True )
     title = models.CharField(verbose_name='Заголовок', max_length=255)
     text_preview = models.TextField(verbose_name='Текст-превью')

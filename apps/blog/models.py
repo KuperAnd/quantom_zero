@@ -31,7 +31,7 @@ class Article(models.Model):
         null=True
     )
     #объединение класса Категория с тегами, blank значит - что поле не обязательно
-    tags = models.ManyToManyField(to=Tag, verbose_name='Тэги', blank=True )
+    tags = models.ManyToManyField(to=Tag, verbose_name='Тэги', blank=True)
     title = models.CharField(verbose_name='Заголовок', max_length=255)
     text_preview = models.TextField(verbose_name='Текст-превью')
     text = models.TextField(verbose_name='Текст')

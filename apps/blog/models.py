@@ -38,6 +38,7 @@ class BlogCategory(models.Model):
         verbose_name = 'Категория блога'
         verbose_name_plural = 'Категории блога'
 
+
 # создание тего
 class Tag(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
@@ -96,7 +97,6 @@ class Article(models.Model):
 
     image_tag.short_description = 'Текущее изображение'
     image_tag.allow_tags = True
-
 
     def __str__(self):
         return self.title

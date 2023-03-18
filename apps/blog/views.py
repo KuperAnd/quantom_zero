@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from apps.blog.models import BlogCategory, Article, Tag
 
+
 #классический контроллер,соединяет то что видит пользователь с нашей логикой(кодом,скрытая логика у нас в моделях models.py)
 # достать все данные из базы данных
 def blog_category_list(request):

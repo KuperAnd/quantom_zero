@@ -16,7 +16,7 @@ class Category(MPTTModel):
         related_name='child',
         on_delete=models.CASCADE,
         blank=True,
-        null=True,
+        null=True
     )
     image = ProcessedImageField(
         verbose_name='Изображение',
@@ -62,9 +62,16 @@ class Product(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     quantity = models.PositiveIntegerField(verbose_name='Количество', default=1)
-    price = models.DecimalField(verbose_name='Цена', max_digits=12, decimal_places=2, default=0)
+    price = models.DecimalField(verbose_name='Цена', max_digits=12, decimal_places=2, default=1000000)
     created_at = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='Дата обновления', auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='Дата обновления', auto_now=True)
+    categories = models.ManyToManyField(
+        to=Category,
+        verbose_name='Категории',
+        through='ProductCategory',
+        related_name='categories',
+        blank=True
+    )
 
     class Meta:
         ordering = ['-created_at']
@@ -75,9 +82,22 @@ class Product(models.Model):
         return self.name
 
 
+class ProductCategory(models.Model):
+    product = models.ForeignKey(to=Product, verbose_name='Товар', on_delete=models.CASCADE)
+    category = models.ForeignKey(to=Category, verbose_name='Категория', on_delete=models.CASCADE)
+    is_main = models.BooleanField(verbose_name='Основная категория', default=False)
 
+    def __str__(self):
+        return ''
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.is_main:
+            ProductCategory.objects.filter(product=self.product).update(is_main=False)
+        super(ProductCategory, self).save(force_insert, force_update, using, update_fields)
 
+    class Meta:
+        verbose_name = 'Категория товара'
+        verbose_name_plural = 'Категории товара'
 
 
 

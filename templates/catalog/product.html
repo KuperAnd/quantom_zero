@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block meta_tags %}
+    {% include '_meta_tags.html' with meta_title=product.get_meta_title meta_description=product.meta_description meta_keywords=product.meta_keywords %}
+{% endblock %}
 {% block content %}
     <div class="product-view">
         <h3 class="my-header">{{ product.name }}</h3>
@@ -7,13 +10,13 @@
             <div class="col-xs-12 col-md-6">
                 <div class="row">
                     {% for image in product.images %}
-                    <div class="col-6">
-                        <a href='{{ image.image.url }}' class="product-image"
-                           data-lightbox="roadtrip">
-                            <img src="{{ image.image_thumbnail.url }}" alt=""
-                                 class="img-thumbnail">
-                        </a>
-                    </div>
+                        <div class="col-6">
+                            <a href='{{ image.image.url }}' class="product-image"
+                               data-lightbox="roadtrip">
+                                <img src="{{ image.image_thumbnail.url }}" alt=""
+                                     class="img-thumbnail">
+                            </a>
+                        </div>
                     {% endfor %}
 
                 </div>

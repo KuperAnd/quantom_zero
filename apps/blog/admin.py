@@ -17,7 +17,7 @@ class BlogCategoryAdmin(admin.ModelAdmin):
     #
     #     ]}]
     # ]
-    fields = ['name', 'image_tag', 'image']
+    fields = ['name', 'image_tag', 'image', 'meta_title', 'meta-description', 'meta-keywords']
     readonly_fields = ['image_tag']
 
     def article_list_link(self, obj):
@@ -36,7 +36,8 @@ class BlogCategoryAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'image_tag_thumbnail', 'category_link', 'tags_links', 'created_at']
     list_display_links = ['id', 'title', 'image_tag_thumbnail']
-    fields = ['category', 'image_tag', 'image', 'tags', 'title', 'text_preview', 'text', 'user']
+    fields = ['category', 'image_tag', 'image', 'tags', 'title', 'text_preview', 'text', 'user',
+              'meta_title', 'meta-description', 'meta-keywords']
     readonly_fields = ['image_tag']
     list_filter = ['category', 'tags']
 
